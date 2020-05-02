@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar padding center text-center color="primary">
+    <ion-title><h1>R$ {{saldo}}</h1></ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content color="light">
+    
+    
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+        <ion-fab-button color="primary">
+          <ion-icon name="arrow-dropup"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+          <ion-fab-button (click)="navegarStatus()" color="tertiary">
+            <ion-icon name="stats"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="navegarCategorias()" color="secondary">
+            <ion-icon name="list"></ion-icon>
+          </ion-fab-button >
+          <ion-fab-button (click)="navegarDespesas()" color="danger">
+            <ion-icon name="sad"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button (click)="navegarLancamentos()" color="success">
+            <ion-icon  name="happy"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+      <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+        <ion-fab-button (click)="navegarLogin()" color="secondary">
+            <ion-icon name="exit"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+      
+
+</ion-content>

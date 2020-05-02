@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar text-center color="danger">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-label  text-center color="danger">
+        <h1>Despesas</h1>
+    </ion-label>
+    <ion-item>
+        <ion-input type="text" placeholder="Descrição"></ion-input>
+      </ion-item>
+      <ion-item >
+        <ion-input [(ngModel)]="valor" type="number" placeholder="R$ 0,00"></ion-input>
+      </ion-item>
+      
+          <ion-datetime displayFormat="DD/MMM/YYYY" value="24/11/2019" placeholder="24/11/2019"></ion-datetime>
+      <ion-item>
+        <ion-input type="text" placeholder="Categoria"><ion-icon name="list" slot="icon-only"></ion-icon></ion-input>
+      </ion-item>
+      
+      <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+          <ion-fab-button (click)="salvar()" name="add" color="success">
+              <ion-icon name="checkmark"></ion-icon>
+            </ion-fab-button>
+      </ion-fab>
+      <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+          <ion-fab-button (click)="ambiente()" color="secondary">
+              <ion-icon name="exit"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>  
+</ion-content>

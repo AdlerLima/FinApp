@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar text-center color="secondary">
+  <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-label text-center color="secondary">
+        <h1>Categorias</h1>
+    </ion-label>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button routerLink="/categoria" name="add" color="success">
+          <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+
+  </ion-fab>
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="ambiente()" color="secondary">
+          <ion-icon name="exit"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+
+  <ion-list>
+      <ion-item-sliding *ngFor="let c of categorias"
+      [ngClass]="{
+        'para-fazer': !c.concluida,
+        'concluida': c.concluida
+      }">
+          <ion-item>
+              <ion-label>
+                  <h2>{{c.id}} - {{c.descricao}}</h2>
+                </ion-label>
+          </ion-item>
+        <ion-item-options side="end">
+              <ion-item-option color="danger">
+                  <button (click)="deletar()" ion-button expandable color="danger">Deletar</button>
+                <ion-icon slot="icon-only"
+                          name="trash"></ion-icon>          
+              </ion-item-option>
+            </ion-item-options>
+          
+        </ion-item-sliding>
+        
+  </ion-list>
+  
+</ion-content>

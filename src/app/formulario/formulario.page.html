@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar  text-center color="primary">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label padding text-center color="secondary">
+      <h1>Cadastro</h1>
+  </ion-label>
+  <ion-item>
+      <ion-label color="primary" position="floating" >Nome</ion-label>
+      <ion-input type="text" ng-model="nome"></ion-input>
+  </ion-item>
+  
+  <ion-item>
+      <form (ngSubmit)="salvar()">
+      <ion-label color="primary" position="floating" >Usuario</ion-label>
+      <ion-input type="text" ></ion-input>
+      </form>
+  </ion-item>
+  
+  <ion-item>
+      <ion-label color="primary" position="floating" >Senha</ion-label>
+      <ion-input type="text" ng-model="senha"></ion-input>
+  </ion-item>
+
+  <ion-item>
+      <ion-label color="primary" position="floating">E-mail</ion-label>
+      <ion-input type="text" ng-model="email"></ion-input>
+  </ion-item>
+  <ion-item>
+      <ion-label color="primary">Nascimento</ion-label>
+      <ion-datetime displayFormat="DD/MMM/YYYY" value="01/01/2000" placeholder="Selecione a data"></ion-datetime>
+  </ion-item>
+<ion-list>
+      <ion-radio-group >
+          <ion-list-header>
+              <ion-label color="primary">
+                <h2>Sexo</h2>
+              </ion-label>
+            </ion-list-header>
+        
+            <ion-item>
+              <ion-label>Feminino</ion-label>
+              <ion-radio slot="start" value="fem" checked ></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Masculino</ion-label>
+                <ion-radio slot="start" value="mas" ></ion-radio>
+              </ion-item>
+              
+              <ion-item>
+                 <ion-button color="warning" expand="block" (click)="showToast()">
+                      Termos de uso
+                  </ion-button>
+              </ion-item>
+              
+                <ion-item>
+                    <ion-toggle  name="concordar"  ></ion-toggle>
+                    <ion-label>Concordo</ion-label>
+                </ion-item>
+              
+      </ion-radio-group>
+  </ion-list> 
+
+  
+  
+ 
+
+  <div text-center>
+  <ion-button (click)="voltar()"color="primary">Voltar</ion-button>
+  <ion-button type="submit" class="finalizar" (click)="voltar()" color="success" >Finalizar</ion-button>
+  </div>
+</ion-content>

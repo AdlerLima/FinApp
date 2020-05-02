@@ -1,3 +1,4 @@
+
 <ion-header>
 <ion-toolbar color="primary">
 </ion-toolbar>
@@ -6,17 +7,24 @@
     <img src="https://i.imgur.com/HFQ2Tvw.png" alt="logo"> 
   <ion-grid>
     <ion-row>
-      <ion-col size-xs="12" size-sm="8" size-md="6">
-          <ion-item>
-              <ion-label color="primary" position="floating">Login</ion-label>
-              <ion-input></ion-input>
+      <ion-col size-xs="12" size-sm="12" size-md="12">
+          <ion-item >
+              <ion-label color="primary" position="floating">Usuario</ion-label>
+              <ion-input ng-model="usuario"></ion-input>
             </ion-item>
           <ion-item>
               <ion-label color="primary" position="floating">Senha</ion-label>
-              <ion-input type="password"></ion-input>
+              <ion-input type="password" ng-model="senha"></ion-input>
           </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid> 
-<ion-button expand="block" >Entrar</ion-button>
-<ion-button color="success"expand="block" >Registrar-se</ion-button>
+<ion-button (click)="entrar()" (click)="showLoading()" expand="block" >Entrar</ion-button>
+<ion-button (click)="navegar()" color="success"expand="block" >Registrar-se</ion-button>
+<ion-footer size-xd="2" size-md="2" size-sm="2" color="danger">
+    <ion-toolbar>
+      <ion-title size="small">
+        V 0.0.1
+      </ion-title>
+    </ion-toolbar>
+  </ion-footer>

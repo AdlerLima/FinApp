@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar text-center color="secondary">
+   
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-label padding text-center color="secondary">
+    <h1>Categorias</h1>
+  </ion-label>
+  <div text-center>
+  <form (ngSubmit)="salvar()">
+    <ion-input placeholder="Digite a descrição da categoria" [(ngModel)]="categoria.descricao" [ngModelOptions]="{standalone: true}"></ion-input>
+    
+    <ion-button type="submit">Salvar</ion-button>
+    <ion-button color="danger" routerLink="/categorias">Cancelar</ion-button>
+</form>
+</div>
+</ion-content>
+
