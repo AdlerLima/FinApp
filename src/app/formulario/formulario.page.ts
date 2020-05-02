@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToastController, NavController } from '@ionic/angular';
-import { Formulario } from './formulario.model';
-import { FormularioService } from '../formulario.service';
+import { ToastController, NavController, LoadingController } from '@ionic/angular';
+import { Usuario } from '../models/usuario.interface';
+import { FormularioService } from '../services/formulario.service';
 
 @Component({
   selector: 'app-formulario',
@@ -11,14 +11,24 @@ import { FormularioService } from '../formulario.service';
 })
 export class FormularioPage implements OnInit {
 
-  private formulario:Formulario;
+  private usuario : Usuario;
 
   constructor(private router:Router,
               private navController: NavController,
               private toastController: ToastController,
-              private service: FormularioService
-              )
-               { }
+              private UsuarioService: FormularioService,
+              private loadingController : LoadingController
+              ){ 
+                this.usuario = {
+                  nome : null,
+                  email : null,
+                  usuario: null,
+                  sexo : null,
+                  nascimento : null,
+                  senha : null
+                }
+  }
+  
   voltar() {
     this.navController.navigateForward(['/home'])
   }
@@ -34,32 +44,77 @@ export class FormularioPage implements OnInit {
       })
       .then(toast => toast.present());
   }
-  salvar(){
-    this.service.salvar(this.formulario);
-    this.formulario = new Formulario();
-    this.navController.navigateForward('/home');
+
+  ValidateInputs(){
+    var error = false;
+    if (this.usuario.nome == null || this.usuario.nome == undefined){
+      this.presentToast('Insira o nome!');
+      return error = true;
+    }
+
+    if (this.usuario.usuario == null){
+      this.presentToast('Insira o usuário!');
+      return error = true;
+    }
+
+    if (this.usuario.senha == null){
+      this.presentToast('Insira a senha!');
+      return error = true;
+    }
+
+    if (this.usuario.email == null){
+      this.presentToast('Insira o e-mail!');
+      return error = true;
+    }
+
+    if (this.usuario.nascimento == null){
+      this.presentToast('Insira a data de nascimento!');
+      return error = true;
+    }
+
+    if (this.usuario.sexo == null){
+      this.presentToast('Selecione o sexo!');
+      return error = true;
+    }
+
+    return error;
   }
+
+  ClearInputsFields(){
+    this.usuario.nome = null;
+    this.usuario.usuario = null;
+    this.usuario.senha = null;
+    this.usuario.email = null;
+    this.usuario.nascimento = null;
+    this.usuario.senha = null;
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+
+  async salvar(){
+    if (!this.ValidateInputs()){
+      let loading = await this.loadingController.create({message: 'Registrando...'});
+      loading.present();
   
+      this.UsuarioService
+      .salvar(this.usuario)
+      .subscribe(() => {
+        loading.dismiss();
+        this.presentToast('Usuário registrado com sucesso!');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/home']);
+      });
+    }
 
-
-
-  
-  // termos(){
-  //   if (this.concordar=true) {
-  //     this.router.navigate(['/home'])
-  //   } else {
-  //     this.toastController
-  //       .create({
-  //         message: 'Você deve concordar com os termos de uso',
-  //         duration: 5000,
-  //         color: "dark",
-  //         showCloseButton: true,
-  //         closeButtonText: 'X',
-  //         position: 'middle'
-  //       })
-  //   }
-  // }
-
+    
+  }
+   
   ngOnInit() {
   }
 

@@ -1,0 +1,13 @@
+{
+  "usuarios": [
+    {
+      "nome": "teste",
+      "email": "twdfs",
+      "usuario": "teste",
+      "sexo": "Feminino",
+      "nascimento": "2019-05-02T19:30:21.987-03:00",
+      "senha": "teste",
+      "id": 1
+    }
+  ]
+}
