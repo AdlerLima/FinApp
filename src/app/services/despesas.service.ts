@@ -1,24 +1,44 @@
 import { Injectable } from '@angular/core';
+import { Despesa } from '../models/despesa.interface';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DespesasService {
   
-  despesas: Despesa[]= [
-    {id: 1, descricao: 'Despesa 1', valor: 150},
-    {id: 2, descricao: 'Despesa 2', valor: 200}
-  ];
+  private URI = 'http://localhost:3000/despesas';
 
-  constructor() { }
+  constructor(
+    private httpClient : HttpClient
+  ) { }
 
-  getDespesa()
-  {
-    return this.despesas;
+  
+  adicionar(despesa: Despesa) {
+    return this.httpClient.post<Despesa>(this.URI, despesa);
   }
-  adicionar(despesas:Despesa){
-    despesas.id = parseInt((Math.random() * 100).toFixed(0));
-    this.despesas = [...this.despesas,despesas]
-    console.log(this.despesas);
+
+  getAll(despesa: Despesa) {
+    return this.httpClient.get<Despesa>(`${this.URI}`);
+  }
+
+  atualizar(despesa: Despesa) {
+    return this.httpClient.put<Despesa>(`${this.URI}/${despesa.id}`, despesa);
+  }
+
+  excluir(despesa: Despesa) {
+    return this.httpClient.delete(`${this.URI}/${despesa.id}`);
+  }
+
+  getDespesa(id: number) {
+    return this.httpClient.get<Despesa>(`${this.URI}/${id}`);
+  }
+
+  salvar(despesa: Despesa) {
+    if (despesa && despesa.id) {
+      return this.atualizar(despesa);
+    } else {
+      return this.adicionar(despesa);
+    }
   }
 }

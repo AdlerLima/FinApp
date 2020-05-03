@@ -33,12 +33,13 @@ export class HomePage {
   }
   entrar(){
     this.UsuarioService.Login(this.usuario).subscribe((data) => {
-      
+
       if(Object.keys(data).length == 1){
         this.showLoading("ambiente");
       }else{
         this.presentToast("Usuário ou senha inválidos");
       }
+      
     }); 
 
   }
