@@ -33,38 +33,25 @@
   ],
   "lancamentos": [
     {
-      "descricao": "teste",
-      "valor": 10,
-      "dataLancamento": "2020-05-02T23:26:57.524-03:00",
-      "categoria": "sdawda",
-      "id": 1
-    },
-    {
-      "descricao": "teste 02 ",
-      "valor": 480,
-      "dataLancamento": "2020-05-02T23:47:35.828-03:00",
-      "categoria": "teste",
-      "id": 2
-    },
-    {
-      "descricao": "aa",
-      "valor": 20,
-      "categoria": "sdawd",
-      "id": 3
-    },
-    {
-      "descricao": "teste000",
-      "valor": 80,
-      "dataLancamento": "2020-05-03T00:17:37.698-03:00",
-      "categoria": "aaa",
-      "id": 4
-    },
-    {
       "descricao": "teste novo",
       "valor": 100,
       "dataLancamento": "2020-05-03T00:39:24.991-03:00",
       "tipo": 1,
       "id": 5
+    },
+    {
+      "descricao": "teste novo",
+      "valor": 30.5,
+      "dataLancamento": "2020-05-03T00:39:24.991-03:00",
+      "tipo": 0,
+      "id": 6
+    },
+    {
+      "descricao": "teste",
+      "valor": 200,
+      "dataLancamento": "2019-05-03T01:45:36.073-03:00",
+      "tipo": 1,
+      "id": 7
     }
   ]
 }

@@ -19,8 +19,8 @@ export class AmbientePage implements OnInit {
   public saldo:number;
 
   usuario:HomePage[];
-  lancamento;
-  despesas;
+  lancamento: Lancamento;
+  despesas: any;
 
   constructor(
     private router:Router,
@@ -30,23 +30,33 @@ export class AmbientePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.saldo = 50;
+    this.listarlancamentos();
   }
-  listarlancamentos()
-  {
+
+  listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
     this.lancamento = data;
-  });
+    this.saldo = this.getSaldo(data);
+    });
   }
-  listardespesas(){
-  this.despesasService.getAll().subscribe((data) => {
-    this.despesas = data;
-  });
+
+  getSaldo(data : any){
+    var entrada = 0;
+    var saida = 0;
+    
+    Object.values(data).forEach(value => {
+        if(value['tipo'] == 1)
+          saida += value['valor'];
+        else if(value['tipo'] == 0)
+          entrada += value['valor'];        
+    });
+
+    return entrada - saida;
   }
+
   ionViewWillEnter()
   {
     this.listarlancamentos();
-    this.listardespesas();
 
   }
  
