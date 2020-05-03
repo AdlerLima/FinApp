@@ -58,22 +58,13 @@
       "dataLancamento": "2020-05-03T00:17:37.698-03:00",
       "categoria": "aaa",
       "id": 4
-    }
-  ],
-  "despesas": [
-    {
-      "descricao": "aaa",
-      "valor": 50,
-      "dataLancamento": "2020-05-03T00:01:10.857-03:00",
-      "categoria": "sdawda",
-      "id": 1
     },
     {
-      "descricao": "aaa",
-      "valor": 45,
-      "dataLancamento": "2020-05-03T00:08:43.883-03:00",
-      "categoria": "aaa",
-      "id": 2
+      "descricao": "teste novo",
+      "valor": 100,
+      "dataLancamento": "2020-05-03T00:39:24.991-03:00",
+      "tipo": 1,
+      "id": 5
     }
   ]
 }

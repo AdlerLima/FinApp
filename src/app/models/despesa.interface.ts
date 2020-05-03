@@ -3,5 +3,6 @@ export interface Despesa {
     descricao: string;
     valor: number;
     dataLancamento : Date;
+    tipo: number;
 
 }

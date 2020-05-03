@@ -23,7 +23,8 @@ export class DespesasPage implements OnInit {
     this.despesa = {
       descricao : null,
       valor : null,
-      dataLancamento : null
+      dataLancamento : null,
+      tipo : 1
     }
    }
 
