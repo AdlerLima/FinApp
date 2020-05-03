@@ -31,6 +31,10 @@ export class FormularioService {
     return this.httpClient.get<Usuario>(`${this.URI}/${id}`);
   }
 
+  Login(usuario: Usuario){
+    return this.httpClient.get<Usuario>(`${this.URI}?usuario=${usuario.usuario}&senha=${usuario.senha}`);
+  }
+
   salvar(usuario: Usuario) {
     if (usuario && usuario.id) {
       return this.atualizar(usuario);
