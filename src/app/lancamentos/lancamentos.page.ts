@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core'
-import { NavController } from '@ionic/angular'
+import { NavController, ToastController, LoadingController } from '@ionic/angular'
 import { AmbientePage } from '../ambiente/ambiente.page';
 import { LancamentosService } from '../services/lancamentos.service';
+
 
 
 
@@ -17,26 +18,67 @@ export class LancamentosPage implements OnInit {
 
   constructor(
     private navController: NavController,
-    private lancamentoService: LancamentosService
+    private lancamentoService: LancamentosService,
+    private toastController:ToastController,
+    private loadingController : LoadingController
   ) { 
     
-    this.lancamento = this.lancamentoService.getLancamento();
-    console.log(this.lancamento);
+    this.lancamento = {
+      descricao : null,
+      valor : null
     }
-  
+    }  
 
   ngOnInit() {
     
   }
+  ValidateInputs(){
+    var error = false;
+    if (this.lancamento.descricao == null || this.lancamento.valor == undefined)
+    {
+      this.presentToast('Insira a Descrição!');
+      return error = true;
+    }
+    if(this.lancamento.valor == null || this.lancamento.valor == undefined)
+    {
+      this.presentToast('Insira o Valor!');
+      return error = true;
+    }
+    return error;
+  }
   ambiente() {
     this.navController.navigateForward(['/ambiente'])
   }
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
+  }
+  ClearInputsFields(){
+    this.lancamento.descricao = null;
+    this.lancamento.valor = null;
+
+
+  }
+    async salvar(){
+      if (!this.ValidateInputs()){
+        let loading = await this.loadingController.create({message: 'Registrando...'});
+        loading.present();
+    
+        this.lancamentoService
+        .salvar(this.lancamento)
+        .subscribe(() => {
+          loading.dismiss();
+          this.presentToast('Lançamento registrado com sucesso!');
+          this.ClearInputsFields();
+          this.navController.navigateForward(['/ambiente']);
+        });
+      }
   
-  salvar(){
-    //console.log(this.lancamento);
-    this.lancamentoService.adicionar(this.lancamento);
-    this.navController.navigateForward(['/ambiente'])
+      
+    }
   }
   
 
-}

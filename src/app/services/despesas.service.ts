@@ -18,7 +18,7 @@ export class DespesasService {
     return this.httpClient.post<Despesa>(this.URI, despesa);
   }
 
-  getAll(despesa: Despesa) {
+  getAll() {
     return this.httpClient.get<Despesa>(`${this.URI}`);
   }
 
