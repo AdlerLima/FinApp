@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { NavController } from '@ionic/angular'
 import { AmbientePage } from '../ambiente/ambiente.page';
+import { LancamentosService } from '../services/lancamentos.service';
 
 
 
@@ -10,27 +11,30 @@ import { AmbientePage } from '../ambiente/ambiente.page';
   styleUrls: ['./lancamentos.page.scss'],
 })
 export class LancamentosPage implements OnInit {
-  private valor:number;
-  
+
+  private lancamento;
+
+
   constructor(
-    private navController: NavController
-  ) { }
+    private navController: NavController,
+    private lancamentoService: LancamentosService
+  ) { 
+    
+    this.lancamento = this.lancamentoService.getLancamento();
+    console.log(this.lancamento);
+    }
+  
 
   ngOnInit() {
+    
   }
   ambiente() {
     this.navController.navigateForward(['/ambiente'])
   }
+  
   salvar(){
-    console.log(this.valor);
-    class somar{
-      valor:number;
-
-      setValor():number{
-        return this.valor;
-        
-      }
-    }
+    //console.log(this.lancamento);
+    this.lancamentoService.adicionar(this.lancamento);
     this.navController.navigateForward(['/ambiente'])
   }
   
