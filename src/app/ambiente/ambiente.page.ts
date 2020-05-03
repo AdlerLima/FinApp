@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+//import {HomePage} from './home.page'
+import { HomePage } from '../home/home.page';
+import { LancamentosService } from '../services/lancamentos.service';
+import { LancamentosPage } from "../lancamentos/lancamentos.page";
+
 
 @Component({
   selector: 'app-ambiente',
@@ -9,14 +14,19 @@ import { Router } from '@angular/router';
 })
 export class AmbientePage implements OnInit {
   public saldo:number;
+  lancamento : Lancamento[];
+
+  usuario:HomePage[];
 
   constructor(
     private router:Router,
-    private navController:NavController
+    private navController:NavController,
+    private lancamentoService: LancamentosService
   ) { }
 
   ngOnInit() {
     this.saldo = 1000;
+    this.lancamento = this.lancamentoService.getLancamento();
   }
 
   navegarLancamentos() {
@@ -36,6 +46,7 @@ export class AmbientePage implements OnInit {
   navegarStatus(){
     this.router.navigate(['status'])
   }
+
   // calculoSaldo(){
   //   this.saldo = 10;
   // }

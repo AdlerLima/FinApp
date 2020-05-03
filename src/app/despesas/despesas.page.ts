@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { DespesasService } from '../services/despesas.service';
 
 
 
@@ -9,11 +10,16 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./despesas.page.scss'],
 })
 export class DespesasPage implements OnInit {
-  private valor:number;
+  
+  private despesa;
 
   constructor(
-    private navController: NavController
-  ) { }
+    private navController: NavController,
+    private despesasService: DespesasService
+  ) {
+    this.despesa = this.despesasService.getDespesa();
+    //console.log(this.despesa);
+   }
 
   ngOnInit() {
   }
@@ -21,17 +27,7 @@ export class DespesasPage implements OnInit {
     this.navController.navigateForward(['/ambiente'])
   }
   salvar(){
-    console.log(this.valor);
-    class subtrair{
-      valor:number;
-
-      setValor():number{
-        return this.valor;
-        
-      }
-    }
+    this.despesasService.adicionar(this.despesa);
     this.navController.navigateForward(['/ambiente'])
   }
- 
-
 }

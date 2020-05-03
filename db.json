@@ -10,12 +10,6 @@
       "id": 1
     },
     {
-      "nome": "Ramon",
-      "email": "teste@teste.com",
-      "usuario": "joaquim",
-      "sexo": "Masculino",
-      "nascimento": "2019-05-02T22:18:44.546-03:00",
-      "senha": "joaquim",
       "id": 2
     }
   ]
