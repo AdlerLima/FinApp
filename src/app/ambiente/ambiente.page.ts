@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 //import {HomePage} from './home.page'
 import { HomePage } from '../home/home.page';
@@ -26,7 +26,9 @@ export class AmbientePage implements OnInit {
     private router:Router,
     private navController:NavController,
     private lancamentoService: LancamentosService,
-    private despesasService: DespesasService
+    private despesasService: DespesasService,
+    private alertController: AlertController,
+    private loadingController: LoadingController
   ) { }
 
   ngOnInit() {
@@ -59,7 +61,32 @@ export class AmbientePage implements OnInit {
     this.listarlancamentos();
 
   }
- 
+
+  async confirmarExclusao(lancamento: Lancamento) {
+    let alerta = await this.alertController.create({
+      header: 'Confirmação de exclusão',
+      message: `Deseja excluir o autor ${lancamento.descricao}?`,
+      buttons: [{
+        text: 'SIM',
+        handler: () => {
+          this.excluir(lancamento);
+        }
+      }, {
+        text: 'NÃO'
+      }]
+    });
+    alerta.present();
+  }
+
+  private async excluir(lancamento: Lancamento) {
+    const busyLoader = await this.loadingController.create({ message: 'Excluíndo...' });
+    busyLoader.present();
+    
+    this.lancamentoService.excluir(lancamento).subscribe(() => {
+      this.ionViewWillEnter()
+      busyLoader.dismiss();
+    });
+  }
 
   navegarLancamentos() {
     this.router.navigate(['lancamentos'])    
