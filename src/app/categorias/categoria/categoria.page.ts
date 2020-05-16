@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../categorias.model';
-import { CategoriaService } from '../categorias.service';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController, LoadingController } from '@ionic/angular';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 
 @Component({
@@ -11,22 +11,61 @@ import { NavController } from '@ionic/angular';
 })
 export class CategoriaPage implements OnInit {
 
-  private categoria: Categoria;
+  private categoria;
 
   constructor(
-    private service : CategoriaService,
-    private nav : NavController
+    private categoriaService : CategoriaService,
+    private navController: NavController,
+    private toastController : ToastController,
+    private loadingController : LoadingController
+    
   ) {
-    this.categoria = new Categoria();
+    this.categoria = {
+      descricao : null
+    }
    }
 
   ngOnInit() {
   }
-  salvar(){
-    this.service.salvar(this.categoria);
+  ValidadeInputs(){
+    var error = false;
+    if (this.categoria.descricao == null)
+    {
+      this.presentToast('Insira a descrição!');
+      return error = true;
+    }
+    return error;
+  }
+  ClearInputsFields(){
+    this.categoria.descricao = null;
+    this.categoria.valor = null;
+  }
+  async salvar(){
+   /*this.service.salvar(this.categoria);
     this.categoria = new Categoria();
     console.log(this.categoria);
-    this.nav.navigateForward('/categorias')
+    this.nav.navigateForward('/categorias')*/
+    if (!this.ValidadeInputs()){
+      let loading = await this.loadingController.create({message : 'Registrando...'});
+      loading.present();
+      
+      this.categoriaService
+      .salvar(this.categoria)
+      .subscribe(() => {
+        loading.dismiss();
+        this.presentToast('Lançamento registrado com sucesso!');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
+        
+      })
+    }
+  }
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

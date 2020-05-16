@@ -21,27 +21,10 @@
       </ion-fab-button>
     </ion-fab>
 
-  <ion-list>
-      <ion-item-sliding *ngFor="let c of categorias"
-      [ngClass]="{
-        'para-fazer': !c.concluida,
-        'concluida': c.concluida
-      }">
-          <ion-item>
-              <ion-label>
-                  <h2>{{c.id}} - {{c.descricao}}</h2>
-                </ion-label>
-          </ion-item>
-        <ion-item-options side="end">
-              <ion-item-option color="danger">
-                  <button (click)="deletar()" ion-button expandable color="danger">Deletar</button>
-                <ion-icon slot="icon-only"
-                          name="trash"></ion-icon>          
-              </ion-item-option>
-            </ion-item-options>
-          
-        </ion-item-sliding>
-        
+  <ion-list *ngFor = "let categoria of categoria">      
+        <ion-label>
+          <h1>{{categoria.descricao}}</h1> 
+        </ion-label>
   </ion-list>
   
 </ion-content>

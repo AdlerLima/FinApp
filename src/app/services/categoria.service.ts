@@ -2,26 +2,30 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../categorias/categorias.model';
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
   private URI = 'http://localhost:3000/categoria';
   constructor(
-    private httpCliente : HttpClient
+    private httpClient : HttpClient
   ) {  }
 
+  getCategorias(){
+    return this.httpClient.get<Categoria>(`${this.URI}`);
+  }
   adicionar(categoria : Categoria){
-    return this.httpCliente.post<Categoria>(this.URI,categoria);
+    return this.httpClient.post<Categoria>(this.URI,categoria);
   }
   atualizar(categoria : Categoria){
-    return this.httpCliente.put<Categoria>(`${this.URI}/${categoria.id}`,categoria);
+    return this.httpClient.put<Categoria>(`${this.URI}/${categoria.id}`,categoria);
   }
   excluir(categoria : Categoria){
-    return this.httpCliente.delete(`${this.URI}/${categoria.id}`);
+    return this.httpClient.delete(`${this.URI}/${categoria.id}`);
   }
   getCategoria(id: number){
-    return this.httpCliente.get<Categoria>(`${this.URI}/${id}`);
+    return this.httpClient.get<Categoria>(`${this.URI}/${id}`);
   }
   salvar(categoria : Categoria){
     if (categoria && categoria.id)

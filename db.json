@@ -77,5 +77,14 @@
       "id": 4
     }
   ],
-  "categoria" : []
+  "categoria": [
+    {
+      "descricao": "Teste",
+      "id": 1
+    },
+    {
+      "descricao": "Teste2",
+      "id": 2
+    }
+  ]
 }
