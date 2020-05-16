@@ -6,7 +6,8 @@
   
 <ion-content color="light">
   <ion-list *ngFor="let lancamentos of lancamento">
-    <ion-item color = "success">
+    <ion-item color = {{lancamentos.cor}}>
+      <!-- [ngStyle]="{'background-color':'green'}"-->
       <ion-label>
         <h1>{{lancamentos.descricao}}</h1>
         <h3>{{lancamentos.valor}}</h3>
@@ -16,14 +17,6 @@
     <ion-icon color="primary" name="trash" slot="end" ></ion-icon>
     </ion-item>
   </ion-list> 
-    <ion-list *ngFor="let despesa of despesas">
-      <ion-item color="danger">
-        {{despesa.descricao}} - {{despesa.valor}}  
-        <ion-icon color="primary" name="create" slot="end" ></ion-icon>
-      <ion-icon color="primary" name="trash" slot="end" ></ion-icon>
-      </ion-item>
-    </ion-list>
-  
     
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
         <ion-fab-button color="primary">

@@ -29,29 +29,53 @@
       "nascimento": "2020-05-02T23:21:35.621-03:00",
       "senha": "adler",
       "id": 4
+    },
+    {
+      "nome": "monique",
+      "email": "moniquelm@gmail.com",
+      "usuario": "moomedeiros",
+      "sexo": "Feminino",
+      "nascimento": "1994-06-03T10:52:39.368-03:00",
+      "senha": "123456",
+      "id": 5
     }
   ],
   "lancamentos": [
     {
-      "descricao": "teste novo",
-      "valor": 100,
-      "dataLancamento": "2020-05-03T00:39:24.991-03:00",
-      "tipo": 1,
-      "id": 5
-    },
-    {
-      "descricao": "teste novo",
-      "valor": 30.5,
-      "dataLancamento": "2020-05-03T00:39:24.991-03:00",
+      "descricao": "Lancamento novo",
+      "valor": 80,
+      "dataLancamento": "2020-05-03T17:32:09.726-03:00",
       "tipo": 0,
-      "id": 6
+      "cor": "success",
+      "categoria": "Teste",
+      "id": 1
     },
     {
-      "descricao": "teste",
-      "valor": 200,
-      "dataLancamento": "2019-05-03T01:45:36.073-03:00",
+      "descricao": "Xis Salada",
+      "valor": 40,
+      "dataLancamento": "2020-05-03T17:34:37.198-03:00",
       "tipo": 1,
-      "id": 7
+      "cor": "danger",
+      "categoria": "lanches",
+      "id": 2
+    },
+    {
+      "descricao": "Mercado",
+      "valor": 250,
+      "dataLancamento": "2020-05-16T14:20:30.802-03:00",
+      "tipo": 0,
+      "cor": "success",
+      "id": 3
+    },
+    {
+      "descricao": "a",
+      "valor": 20,
+      "dataLancamento": "2020-05-16T14:30:19.500-03:00",
+      "tipo": 0,
+      "cor": "success",
+      "categoria": "03",
+      "id": 4
     }
-  ]
+  ],
+  "categoria" : []
 }

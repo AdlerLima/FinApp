@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NavController, ToastController, LoadingController } from '@ionic/angular'
 import { AmbientePage } from '../ambiente/ambiente.page';
 import { LancamentosService } from '../services/lancamentos.service';
+import { Categoria } from '../categorias/categorias.model';
 
 
 
@@ -25,7 +26,10 @@ export class LancamentosPage implements OnInit {
     
     this.lancamento = {
       descricao : null,
-      valor : null
+      valor : null,
+      dataLancamento : null,
+      tipo : 0,
+      cor : "success"
     }
     }  
 
@@ -42,6 +46,11 @@ export class LancamentosPage implements OnInit {
     if(this.lancamento.valor == null || this.lancamento.valor == undefined)
     {
       this.presentToast('Insira o Valor!');
+      return error = true;
+    }
+    if(this.lancamento.dataLancamento == null)
+    {
+      this.presentToast('Insira a data!');
       return error = true;
     }
     return error;
@@ -74,10 +83,9 @@ export class LancamentosPage implements OnInit {
           this.presentToast('Lançamento registrado com sucesso!');
           this.ClearInputsFields();
           this.navController.navigateForward(['/ambiente']);
+          console.log(Categoria);
         });
-      }
-  
-      
+      } 
     }
   }
   

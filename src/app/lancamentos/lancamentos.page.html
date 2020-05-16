@@ -16,9 +16,21 @@
     <ion-input [(ngModel)]="lancamento.valor" type="number" placeholder="R$ 0,00" [value]="valor"></ion-input>
   </ion-item>  
       <ion-datetime [(ngModel)]="lancamento.dataLancamento" displayFormat="DD/MMM/YYYY" value="24/11/2019" placeholder="24/11/2019"></ion-datetime>
-  <ion-item>
+ <!-- <ion-item>
     <ion-input [(ngModel)]="lancamento.categoria" type="text" placeholder="categoria"><ion-icon name="list" slot="icon-only"></ion-icon></ion-input>
-  </ion-item>
+  </ion-item>-->
+    <ion-item >
+          <ion-label>Categoria</ion-label>
+          <ion-select value="03" [(ngModel)]="lancamento.categoria">
+            <ion-select-option value="01">Mercado</ion-select-option>
+            <ion-select-option value="02">Farmacia</ion-select-option>
+            <ion-select-option value="03">Lanchonete</ion-select-option>
+            <ion-select-option value="04">Lazer</ion-select-option>
+            <ion-select-option value="05">Restaurante</ion-select-option>
+            <ion-select-option value="06">Saúde</ion-select-option>
+            <ion-select-option value="07">Transporte</ion-select-option>
+          </ion-select>
+        </ion-item>
  
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button (click)="salvar()" name="add" color="success">

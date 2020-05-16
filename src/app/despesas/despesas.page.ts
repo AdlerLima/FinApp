@@ -24,7 +24,8 @@ export class DespesasPage implements OnInit {
       descricao : null,
       valor : null,
       dataLancamento : null,
-      tipo : 1
+      tipo : 1,
+      cor : "danger"
     }
    }
 
@@ -82,8 +83,6 @@ export class DespesasPage implements OnInit {
         this.ClearInputsFields();
         this.navController.navigateForward(['/ambiente']);
       });
-    }
-
-    
+    }    
   }
 }
