@@ -1,14 +1,12 @@
 <ion-header>
   <ion-toolbar text-center color="secondary">
-  <ion-title></ion-title>
+  <ion-title>
+    Categorias
+  </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="">
-    <ion-label text-center color="secondary">
-        <h1>Categorias</h1>
-    </ion-label>
-
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
       <ion-fab-button routerLink="/categoria" name="add" color="success">
           <ion-icon name="add"></ion-icon>
@@ -22,11 +20,22 @@
     </ion-fab>
 
   <ion-list *ngFor="let c of categorias">      
-      <ion-item>
-        <ion-label>
-          <h1>{{c.descricao}}</h1>
+    <ion-item-sliding>
+      <ion-item class="items" lines="full">
+        <ion-icon name="list"></ion-icon>
+        <ion-label color="dark">         
+            <i>{{c.descricao}}</i>
         </ion-label>           
-      </ion-item> 
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option class="items " color="danger" (click)="confirmarExclusao(c)"><ion-icon size="large" color="light" name="trash" slot="end" ></ion-icon></ion-item-option>
+      </ion-item-options>
+
+      <ion-item-options side="start">
+        <ion-item-option  class="items" color="warning" [routerLink] = "['./categoria/', c.id]" > <ion-icon  size="large" color="light" name="create" slot="end" ></ion-icon></ion-item-option>
+
+      </ion-item-options>  
+    </ion-item-sliding>    
   </ion-list>
   
 </ion-content>

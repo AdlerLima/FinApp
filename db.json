@@ -42,37 +42,41 @@
   ],
   "lancamentos": [
     {
-      "descricao": "tete",
-      "valor": 24234,
-      "dataLancamento": "2019-05-16T23:30:10.641-03:00",
+      "descricao": "sdfsd",
+      "valor": 4234,
+      "dataLancamento": "2019-05-17T16:45:05.943-03:00",
       "categoria": {
-        "descricao": "novacategoria",
-        "id": 3
-      },
-      "tipo": 0,
-      "cor": "success",
-      "id": 1
-    },
-    {
-      "descricao": "teste",
-      "valor": 234,
-      "dataLancamento": "2019-05-16T23:36:04.907-03:00",
-      "categoria": {
-        "descricao": "Teste2",
-        "id": 2
+        "descricao": "tuti fruit",
+        "id": 4
       },
       "tipo": 1,
       "cor": "danger",
+      "id": 2
+    },
+    {
+      "descricao": "efsdfs",
+      "valor": 3345,
+      "dataLancamento": "2019-05-17T17:15:06.610-03:00",
+      "categoria": {
+        "descricao": "cacassss",
+        "id": 7
+      },
+      "tipo": 0,
+      "cor": "success",
       "id": 3
     }
   ],
   "categoria": [
     {
-      "descricao": "Teste",
-      "id": 1
+      "descricao": "Lazer",
+      "id": 2
     },
     {
-      "descricao": "Teste2",
+      "descricao": "Shopping",
+      "id": 2
+    },
+    {
+      "descricao": "Alimentação",
       "id": 2
     },
     {
@@ -80,20 +84,16 @@
       "id": 2
     },
     {
-      "descricao": "novacategoria",
-      "id": 3
-    },
-    {
-      "descricao": "cccc",
+      "descricao": "tuti fruit",
       "id": 4
     },
     {
-      "descricao": "ramon joaquim",
-      "id": 5
+      "descricao": "cacassss",
+      "id": 7
     },
     {
-      "descricao": "ggg",
-      "id": 6
+      "descricao": "cacassss",
+      "id": 7
     }
   ],
   "boletos": [

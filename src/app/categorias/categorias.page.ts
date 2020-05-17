@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Categoria } from './../models/categoria.interface';
 import { CategoriaService } from '../services/categoria.service';
-import { ToastController, NavController } from '@ionic/angular';
+import { ToastController, NavController, AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-categorias',
@@ -15,7 +15,9 @@ export class CategoriasPage implements OnInit {
   constructor(
     private categoriaService: CategoriaService,
     private toastController: ToastController,
-    private navController: NavController
+    private navController: NavController,
+    private alertController: AlertController,
+    private loadingController: LoadingController,
   ) {}
 
   ngOnInit() {
@@ -31,20 +33,43 @@ export class CategoriasPage implements OnInit {
       this.categorias = data;
     });
   }
-  
-  deletar() {
-    this.toastController
-      .create({
-        message: 'Categoria Deletada',
-        duration: 900,
-        color: "warning",
-        showCloseButton: true,
-        closeButtonText: 'X',
-        position: 'bottom'
-      })
-      .then(toast => toast.present());
+
+  async confirmarExclusao(categoria: Categoria) {
+    let alerta = await this.alertController.create({
+      header: 'Confirmação de exclusão',
+      message: `Deseja excluir a categoria ${categoria.descricao}?`,
+      buttons: [{
+        text: 'SIM',
+        handler: () => {
+          this.excluir(categoria);
+        }
+      }, {
+        text: 'NÃO'
+      }]
+    });
+    alerta.present();
   }
 
+  private async excluir(categoria: Categoria) {
+    const busyLoader = await this.loadingController.create({ message: 'Excluíndo...' });
+    busyLoader.present();
+    
+    this.categoriaService.excluir(categoria).subscribe(() => {
+      this.showToast('Categoria excluída!');
+      this.ionViewWillEnter()
+      busyLoader.dismiss();
+    });
+  }
+  async showToast(message) {
+    const toast = await this.toastController.create({
+      header: message,
+      position: 'top',
+      color: 'success',
+      duration: 2000
+    });
+    toast.present();
+  }
+  
   ambiente(){
     this.navController.navigateForward(['/categorias'])
   }
