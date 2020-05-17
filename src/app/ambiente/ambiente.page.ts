@@ -8,6 +8,7 @@ import { LancamentosPage } from "../lancamentos/lancamentos.page";
 import { Lancamento } from '../models/lancamento.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DespesasService } from '../services/despesas.service';
+import { CategoriaService } from '../services/categoria.service';
 
 
 @Component({
@@ -20,12 +21,15 @@ export class AmbientePage implements OnInit {
 
   usuario:HomePage[];
   lancamento: Lancamento;
+  categoria : any
   despesas: any;
+  c : any;
 
   constructor(
     private router:Router,
     private navController:NavController,
     private lancamentoService: LancamentosService,
+    private categoriaService: CategoriaService,
     private despesasService: DespesasService,
     private alertController: AlertController,
     private loadingController: LoadingController
@@ -37,9 +41,17 @@ export class AmbientePage implements OnInit {
 
   listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
+    //   Object.values(data).forEach(value => {
+           
+    //       this.categoriaService.getCategoria(value['categoria']).subscribe((data) => {
+    //        console.log(data.descricao);   
+    //        this.c += data.descricao;    
+    //       })
+    //   })
+    //  this.categoria = this.c;
     this.lancamento = data;
     this.saldo = this.getSaldo(data);
-    });
+    })
   }
 
   getSaldo(data : any){

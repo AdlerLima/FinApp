@@ -29,7 +29,7 @@ export class LancamentosPage implements OnInit {
       descricao : null,
       valor : null,
       dataLancamento : null,
-      categoria : null,
+      categoria : [],
       tipo : 0,
       cor : "success"
     }
@@ -52,16 +52,25 @@ export class LancamentosPage implements OnInit {
       this.presentToast('Insira a Descrição!');
       return error = true;
     }
+
     if(this.lancamento.valor == null || this.lancamento.valor == undefined)
     {
       this.presentToast('Insira o Valor!');
       return error = true;
     }
+
     if(this.lancamento.dataLancamento == null)
     {
       this.presentToast('Insira a data!');
       return error = true;
     }
+
+    if(this.lancamento.categoria == null)
+    {
+      this.presentToast('Informe a categoria!');
+      return error = true;
+    }
+
     return error;
   }
 

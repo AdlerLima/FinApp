@@ -15,11 +15,17 @@
   <ion-item>
     <ion-input [(ngModel)]="lancamento.valor" type="number" placeholder="R$ 0,00" [value]="valor"></ion-input>
   </ion-item>  
-      <ion-datetime [(ngModel)]="lancamento.dataLancamento" displayFormat="DD/MMM/YYYY" value="24/11/2019" placeholder="24/11/2019"></ion-datetime>
+      <ion-item>
+        <ion-label color="primary">Data</ion-label>
+          <ion-datetime [(ngModel)]="lancamento.dataLancamento" displayFormat="DD/MMM/YYYY" value="24/11/2019" placeholder="24/11/2019"></ion-datetime>
+      </ion-item>
+
     <ion-item >
           <ion-label>Categoria</ion-label>
           <ion-select [(ngModel)]="lancamento.categoria">
-            <ion-select-option *ngFor="let c of categorias"value="{{c.id}}">{{c.descricao}}</ion-select-option>
+            <ion-select-option *ngFor="let c of categorias" [value]="c">
+              {{c.descricao}}
+            </ion-select-option>
           </ion-select>
     </ion-item>
  

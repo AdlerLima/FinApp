@@ -42,39 +42,28 @@
   ],
   "lancamentos": [
     {
-      "descricao": "Lancamento novo",
-      "valor": 80,
-      "dataLancamento": "2020-05-03T17:32:09.726-03:00",
+      "descricao": "tete",
+      "valor": 24234,
+      "dataLancamento": "2019-05-16T23:30:10.641-03:00",
+      "categoria": {
+        "descricao": "novacategoria",
+        "id": 3
+      },
       "tipo": 0,
       "cor": "success",
-      "categoria": "Teste",
       "id": 1
     },
     {
-      "descricao": "Xis Salada",
-      "valor": 40,
-      "dataLancamento": "2020-05-03T17:34:37.198-03:00",
+      "descricao": "teste",
+      "valor": 234,
+      "dataLancamento": "2019-05-16T23:36:04.907-03:00",
+      "categoria": {
+        "descricao": "Teste2",
+        "id": 2
+      },
       "tipo": 1,
       "cor": "danger",
-      "categoria": "lanches",
-      "id": 2
-    },
-    {
-      "descricao": "Mercado",
-      "valor": 250,
-      "dataLancamento": "2020-05-16T14:20:30.802-03:00",
-      "tipo": 0,
-      "cor": "success",
       "id": 3
-    },
-    {
-      "descricao": "a",
-      "valor": 20,
-      "dataLancamento": "2020-05-16T14:30:19.500-03:00",
-      "tipo": 0,
-      "cor": "success",
-      "categoria": "03",
-      "id": 4
     }
   ],
   "categoria": [
@@ -85,6 +74,26 @@
     {
       "descricao": "Teste2",
       "id": 2
+    },
+    {
+      "descricao": "Teste2",
+      "id": 2
+    },
+    {
+      "descricao": "novacategoria",
+      "id": 3
+    },
+    {
+      "descricao": "cccc",
+      "id": 4
+    },
+    {
+      "descricao": "ramon joaquim",
+      "id": 5
+    },
+    {
+      "descricao": "ggg",
+      "id": 6
     }
   ]
 }

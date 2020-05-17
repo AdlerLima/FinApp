@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ToastController, NavController, LoadingController } from '@ionic/angular';
 import { DespesasService } from '../services/despesas.service';
 import { Despesa } from "../models/despesa.interface";
+import { CategoriaService } from '../services/categoria.service';
 
 
 
@@ -13,10 +14,12 @@ import { Despesa } from "../models/despesa.interface";
 export class DespesasPage implements OnInit {
   
   private despesa : Despesa;
+  private categorias;
 
   constructor(
     private navController: NavController,
     private despesasService: DespesasService,
+    private categoriaService: CategoriaService,
     private toastController: ToastController,
     private loadingController : LoadingController
   ) {
@@ -24,6 +27,7 @@ export class DespesasPage implements OnInit {
       descricao : null,
       valor : null,
       dataLancamento : null,
+      categoria : [],
       tipo : 1,
       cor : "danger"
     }
@@ -38,6 +42,13 @@ export class DespesasPage implements OnInit {
   } 
 
   ngOnInit() {
+    this.listarCategorias();
+  }
+
+  listarCategorias(){
+    this.categoriaService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+    });
   }
 
   ValidateInputs(){
@@ -57,6 +68,11 @@ export class DespesasPage implements OnInit {
       return error = true;
     }
 
+    if (this.despesa.categoria == null){
+      this.presentToast('Informe a categoria!');
+      return error = true;
+    }
+
     return error;
   }
 
@@ -64,6 +80,7 @@ export class DespesasPage implements OnInit {
     this.despesa.descricao = null;
     this.despesa.valor = null;
     this.despesa.dataLancamento = null;
+    this.despesa.categoria = null;
   }
 
   ambiente() {

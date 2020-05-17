@@ -4,7 +4,7 @@ export interface Lancamento {
     descricao: string;
     valor: number;
     dataLancamento : Date;
-    categoria : Categoria;
+    categoria : Categoria[];
     tipo: number;
     cor : string;
 

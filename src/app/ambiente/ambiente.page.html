@@ -11,8 +11,9 @@
       <ion-item class="items" color = {{lancamentos.cor}}>
         <ion-label>
           <h1>{{lancamentos.descricao}}</h1>
-          <h3>{{lancamentos.valor}}</h3>
-          <h4>{{lancamentos.dataLancamento}}</h4>
+          <h3>R$ {{lancamentos.valor}}</h3>
+          <h4>Data: {{lancamentos.dataLancamento}}</h4>
+          <h4>#{{lancamentos.categoria.descricao}}</h4>
         </ion-label>           
       </ion-item>
       <ion-item-options side="end">
