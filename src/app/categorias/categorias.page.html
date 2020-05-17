@@ -22,8 +22,9 @@
   <ion-list *ngFor="let c of categorias">      
     <ion-item-sliding>
       <ion-item class="items" lines="full">
-        <ion-label color="dark">
-          <h3>#<i>{{c.descricao}}</i></h3>
+        <ion-icon name="list"></ion-icon>
+        <ion-label color="dark">         
+            <i>{{c.descricao}}</i>
         </ion-label>           
       </ion-item>
       <ion-item-options side="end">
