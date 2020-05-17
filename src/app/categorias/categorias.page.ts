@@ -28,10 +28,8 @@ export class CategoriasPage implements OnInit {
 
   listarCategorias(){
     this.categoriaService.getCategorias().subscribe((data) => {
-       console.log(data);
       this.categorias = data;
     });
-    console.log("tesesss");
   }
   
   deletar() {
