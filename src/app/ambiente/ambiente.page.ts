@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController, LoadingController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 //import {HomePage} from './home.page'
 import { HomePage } from '../home/home.page';
 import { LancamentosService } from '../services/lancamentos.service';
@@ -24,6 +24,7 @@ export class AmbientePage implements OnInit {
   categoria : any
   despesas: any;
   c : any;
+  x : number;
 
   constructor(
     private router:Router,
@@ -32,7 +33,8 @@ export class AmbientePage implements OnInit {
     private categoriaService: CategoriaService,
     private despesasService: DespesasService,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+
   ) { }
 
   ngOnInit() {
@@ -72,6 +74,16 @@ export class AmbientePage implements OnInit {
   {
     this.listarlancamentos();
 
+  }
+  editar( lancamento : Lancamento){    
+    /*this.x = parseInt(`${lancamento.tipo}?`)    
+    if (this.x == 0){*/
+      this.router.navigate(['lancamentos']) 
+    /*}else if (this.x == 1){
+      this.navegarDespesas();
+    }*/
+
+    
   }
 
   async confirmarExclusao(lancamento: Lancamento) {

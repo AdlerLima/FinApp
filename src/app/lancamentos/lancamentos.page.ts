@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { NavController, ToastController, LoadingController } from '@ionic/angular'
 import { LancamentosService } from '../services/lancamentos.service';
 import { CategoriaService } from '../services/categoria.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -22,7 +23,8 @@ export class LancamentosPage implements OnInit {
     private lancamentoService: LancamentosService,
     private categoriaService: CategoriaService,
     private toastController:ToastController,
-    private loadingController : LoadingController
+    private loadingController : LoadingController,
+    private activatedRoute : ActivatedRoute
   ) { 
     
     this.lancamento = {
@@ -35,8 +37,18 @@ export class LancamentosPage implements OnInit {
     }
     }  
 
-  ngOnInit() {
+ async ngOnInit() {
     this.listarCategorias();
+
+    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    if(id){
+      const loading = await this.loadingController.create({message:'Carregando'});
+      loading.present();
+      this.lancamentoService.getLancamento(id).subscribe((data) =>{
+        this.lancamento = data;
+        loading.dismiss();
+      })
+    }
   }
 
   listarCategorias(){
