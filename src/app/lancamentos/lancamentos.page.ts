@@ -3,6 +3,7 @@ import { NavController, ToastController, LoadingController } from '@ionic/angula
 import { LancamentosService } from '../services/lancamentos.service';
 import { CategoriaService } from '../services/categoria.service';
 import { ActivatedRoute } from '@angular/router';
+import { Data } from "../helpers/data";
 
 
 
@@ -17,25 +18,25 @@ export class LancamentosPage implements OnInit {
   private lancamento;
   private categorias;
 
-
   constructor(
     private navController: NavController,
     private lancamentoService: LancamentosService,
     private categoriaService: CategoriaService,
     private toastController:ToastController,
     private loadingController : LoadingController,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private DataHelper : Data
   ) { 
     
     this.lancamento = {
       descricao : null,
       valor : null,
-      dataLancamento : null,
+      dataLancamento : new Date(),
       categoria : [],
       tipo : 0,
       cor : "success"
     }
-    }  
+    }
 
  async ngOnInit() {
     this.listarCategorias();
@@ -106,11 +107,13 @@ export class LancamentosPage implements OnInit {
     this.lancamento.categoria = null;
   }
 
+  
   async salvar(){
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando...'});
       loading.present();
-  
+      this.lancamento.dataLancamento = this.DataHelper.formatDate(this.lancamento.dataLancamento);
+      
       this.lancamentoService
       .salvar(this.lancamento)
       .subscribe(() => {

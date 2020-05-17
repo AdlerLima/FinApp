@@ -4,6 +4,7 @@ import { DespesasService } from '../services/despesas.service';
 import { Despesa } from "../models/despesa.interface";
 import { CategoriaService } from '../services/categoria.service';
 import { ActivatedRoute } from '@angular/router';
+import { Data } from "../helpers/data";
 
 
 
@@ -23,7 +24,8 @@ export class DespesasPage implements OnInit {
     private categoriaService: CategoriaService,
     private toastController: ToastController,
     private loadingController : LoadingController,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private DataHelper : Data
   ) {
     this.despesa = {
       descricao : null,
@@ -104,7 +106,7 @@ export class DespesasPage implements OnInit {
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando despesa...'});
       loading.present();
-  
+      this.despesa.dataLancamento = this.DataHelper.formatDate(this.despesa.dataLancamento);
       this.despesasService
       .salvar(this.despesa)
       .subscribe(() => {
