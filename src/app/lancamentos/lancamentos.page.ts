@@ -59,27 +59,27 @@ export class LancamentosPage implements OnInit {
 
   ValidateInputs(){
     var error = false;
-    if (this.lancamento.descricao == null || this.lancamento.valor == undefined)
+    if (this.lancamento.descricao == null || this.lancamento.descricao == undefined)
     {
-      this.presentToast('Insira a Descrição!');
+      this.presentToast('Insira a Descrição!', 'warning');
       return error = true;
     }
 
     if(this.lancamento.valor == null || this.lancamento.valor == undefined)
     {
-      this.presentToast('Insira o Valor!');
+      this.presentToast('Insira o Valor!', 'warning');
       return error = true;
     }
 
     if(this.lancamento.dataLancamento == null)
     {
-      this.presentToast('Insira a data!');
+      this.presentToast('Insira a data!', 'warning');
       return error = true;
     }
 
     if(this.lancamento.categoria == null)
     {
-      this.presentToast('Informe a categoria!');
+      this.presentToast('Informe a categoria!', 'warning');
       return error = true;
     }
 
@@ -90,11 +90,11 @@ export class LancamentosPage implements OnInit {
     this.navController.navigateForward(['/ambiente'])
   }
 
-  async presentToast(message) {
+  async presentToast(message, color) {
     const toast = await this.toastController.create({
       message: message,
       position: 'top',
-      color: 'success',
+      color: color,
       duration: 2000
     });
     toast.present();
@@ -115,7 +115,7 @@ export class LancamentosPage implements OnInit {
       .salvar(this.lancamento)
       .subscribe(() => {
         loading.dismiss();
-        this.presentToast('Lançamento registrado com sucesso!');
+        this.presentToast('Lançamento registrado com sucesso!', 'success');
         this.ClearInputsFields();
         this.navController.navigateForward(['/ambiente']);
       });

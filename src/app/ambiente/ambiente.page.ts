@@ -87,17 +87,17 @@ export class AmbientePage implements OnInit {
     busyLoader.present();
     
     this.lancamentoService.excluir(lancamento).subscribe(() => {
-      this.showToast('Lançamento excluído!');
+      this.showToast('Lançamento excluído!', 'danger');
       this.ionViewWillEnter()
       busyLoader.dismiss();
     });
   }
 
-  async showToast(message) {
+  async showToast(message, color) {
     const toast = await this.toastController.create({
       header: message,
       position: 'top',
-      color: 'success',
+      color: color,
       duration: 2000
     });
     toast.present();

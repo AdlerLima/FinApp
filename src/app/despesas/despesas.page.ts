@@ -35,11 +35,11 @@ export class DespesasPage implements OnInit {
     }
    }
 
-  async presentToast(message) {
+  async presentToast(message, color) {
     const toast = await this.toastController.create({
       message: message,
       position: 'top',
-      color: 'success',
+      color: color,
       duration: 2000
     });
     toast.present();
@@ -67,22 +67,22 @@ export class DespesasPage implements OnInit {
   ValidateInputs(){
     var error = false;
     if (this.despesa.descricao == null){
-      this.presentToast('Insira a descrição!');
+      this.presentToast('Insira a descrição!', 'warning');
       return error = true;
     }
 
     if (this.despesa.valor == null){
-      this.presentToast('Insira o valor!');
+      this.presentToast('Insira o valor!',  'warning');
       return error = true;
     }
 
     if (this.despesa.dataLancamento == null){
-      this.presentToast('Insira a data!');
+      this.presentToast('Insira a data!',  'warning');
       return error = true;
     }
 
     if (this.despesa.categoria == null){
-      this.presentToast('Informe a categoria!');
+      this.presentToast('Informe a categoria!',  'warning');
       return error = true;
     }
 
@@ -109,7 +109,7 @@ export class DespesasPage implements OnInit {
       .salvar(this.despesa)
       .subscribe(() => {
         loading.dismiss();
-        this.presentToast('Despesa registrada com sucesso!');
+        this.presentToast('Despesa registrada com sucesso!',  'success');
         this.ClearInputsFields();
         this.navController.navigateForward(['/ambiente']);
       });
