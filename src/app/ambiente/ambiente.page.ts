@@ -28,6 +28,7 @@ export class AmbientePage implements OnInit {
   x : number;
   private boletos;
   private dataVencimento;
+  public cor : string;
   
   constructor(
     private router:Router,
@@ -41,21 +42,26 @@ export class AmbientePage implements OnInit {
 
   ngOnInit() {
     this.listarlancamentos();
-    
-    //console.log(this.getBoletos());
+    this.corAmbiente();
   }
 
   listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
       this.lancamento = data;
-      this.saldo = this.getSaldo(data);
+      this.saldo = this.getSaldo(data);      
     })
+  }
+  corAmbiente(){
+    if(this.saldo < 0){
+      this.cor = "danger"
+    }else{
+      this.cor = "primary"
+    }
+    
   }
   getBoletos(){
     var dNow = new Date();
-    var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear() + ' ' + dNow.getHours() + ':' + dNow.getMinutes();
-    console.log(localdate);    
-
+    var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear();
     this.boletosService.getAll().subscribe((data) =>{
       this.boletos = data;
       Object.values(data).forEach(value => {
@@ -89,7 +95,7 @@ export class AmbientePage implements OnInit {
         if(value['tipo'] == 1)
           saida += value['valor'];
         else if(value['tipo'] == 0)
-          entrada += value['valor'];        
+          entrada += value['valor'];      
     });
 
     return entrada - saida;
@@ -99,7 +105,7 @@ export class AmbientePage implements OnInit {
   {
     this.listarlancamentos();
     this.getBoletos();
-
+    this.corAmbiente();
   }
 
   async confirmarExclusao(lancamento: Lancamento) {

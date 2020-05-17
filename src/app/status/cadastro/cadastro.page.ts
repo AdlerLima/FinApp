@@ -85,6 +85,7 @@ export class CadastroPage implements OnInit {
     this.boleto.categoria = null;
   }
   async salvar(){
+    
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando...'});
       loading.present();

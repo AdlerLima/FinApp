@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar padding center text-center color="primary">
+  <ion-toolbar padding center text-center color="{{cor}}">
     <ion-title><h1>R$ {{saldo}}</h1></ion-title>
   </ion-toolbar>
 </ion-header>
@@ -13,7 +13,7 @@
           <h1>{{lancamentos.descricao}}</h1>
           <h3>R$ {{lancamentos.valor}}</h3>
           <h4>Data: {{lancamentos.dataLancamento}}</h4>
-          <h4>#{{lancamentos.categoria.descricao}}</h4>
+          <h4><ion-icon  name="list" ></ion-icon>{{lancamentos.categoria.descricao}}</h4>
         </ion-label>           
       </ion-item>
       <ion-item-options side="end">
@@ -44,7 +44,11 @@
           <ion-fab-button (click)="navegarLancamentos()" color="success">
             <ion-icon  name="happy"></ion-icon>
           </ion-fab-button>
+        <!--  <ion-chip>
+            <ion-label>Default</ion-label>
+          </ion-chip>-->
         </ion-fab-list>
+        
       </ion-fab>
       <ion-fab horizontal="start" vertical="bottom" slot="fixed">
         <ion-fab-button (click)="navegarLogin()" color="secondary">
