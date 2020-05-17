@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>cadastro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item> 
+    <ion-input [(ngModel)]="boleto.descricao" type="text" placeholder="Descrição"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-input [(ngModel)]="boleto.valor" type="number" placeholder="R$ 0,00" [value]="valor"></ion-input>
+  </ion-item>  
+      <ion-item>
+        <ion-label color="primary">Data</ion-label>
+          <ion-datetime [(ngModel)]="boleto.dataVencimento" displayFormat="DD/MMM/YYYY" value="24/11/2019" placeholder="24/11/2019"></ion-datetime>
+      </ion-item>
+
+    <ion-item >
+          <ion-label>Categoria</ion-label>
+          <ion-select [(ngModel)]="boleto.categoria">
+            <ion-select-option *ngFor="let c of categorias" [value]="c">
+              {{c.descricao}}
+            </ion-select-option>
+          </ion-select>
+    </ion-item>
+    <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+      <ion-fab-button (click)="salvar()" name="add" color="success">
+          <ion-icon name="checkmark"></ion-icon>
+        </ion-fab-button>
+  </ion-fab>
+  <ion-item>
+    <ion-label>Lembre-me</ion-label>
+    <ion-toggle [(ngModel)]="boleto.lembrar" checked ></ion-toggle>
+  </ion-item>
+
+  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button [routerLink]="['/status']" color="secondary">
+        <ion-icon name="exit"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

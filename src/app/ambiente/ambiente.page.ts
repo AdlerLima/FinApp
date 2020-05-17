@@ -9,6 +9,7 @@ import { Lancamento } from '../models/lancamento.interface';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { DespesasService } from '../services/despesas.service';
 import { CategoriaService } from '../services/categoria.service';
+import { BoletosService } from '../services/boletos.service';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class AmbientePage implements OnInit {
   despesas: any;
   c : any;
   x : number;
-
+  private boletos;
+  private dataVencimento;
+  
   constructor(
     private router:Router,
     private navController:NavController,
@@ -34,11 +37,14 @@ export class AmbientePage implements OnInit {
     private despesasService: DespesasService,
     private alertController: AlertController,
     private loadingController: LoadingController,
+    private boletosService: BoletosService
 
   ) { }
 
   ngOnInit() {
     this.listarlancamentos();
+    
+    //console.log(this.getBoletos());
   }
 
   listarlancamentos(){
@@ -54,6 +60,35 @@ export class AmbientePage implements OnInit {
     this.lancamento = data;
     this.saldo = this.getSaldo(data);
     })
+  }
+  getBoletos(){
+    var dNow = new Date();
+    var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear() + ' ' + dNow.getHours() + ':' + dNow.getMinutes();
+    console.log(localdate);    
+
+    this.boletosService.getAll().subscribe((data) =>{
+      this.boletos = data;
+      Object.values(data).forEach(value => {
+        if(value['dataVencimento'] <= localdate)
+          this.alerta();   
+    });
+    })
+    
+  }
+  async alerta(){
+    let alerta = await this.alertController.create({
+      header: 'Aviso!',
+      message: `A Boletos a vencer deseja ve-los?`,
+      buttons: [{
+        text: 'SIM',
+        handler: () => {
+          this.router.navigate(['/status'])    
+        }
+      }, {
+        text: 'NÃO'
+      }]
+    });
+    alerta.present();
   }
 
   getSaldo(data : any){
@@ -73,6 +108,7 @@ export class AmbientePage implements OnInit {
   ionViewWillEnter()
   {
     this.listarlancamentos();
+    this.getBoletos();
 
   }
 
@@ -91,7 +127,7 @@ export class AmbientePage implements OnInit {
   async confirmarExclusao(lancamento: Lancamento) {
     let alerta = await this.alertController.create({
       header: 'Confirmação de exclusão',
-      message: `Deseja excluir o autor ${lancamento.descricao}?`,
+      message: `Deseja excluir o Lancamento ${lancamento.descricao}?`,
       buttons: [{
         text: 'SIM',
         handler: () => {

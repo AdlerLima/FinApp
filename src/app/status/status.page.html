@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Status</ion-title>
+    <ion-title>Boletos</ion-title>
     <ion-buttons slot="start">
         <ion-back-button></ion-back-button>
       </ion-buttons>
@@ -8,26 +8,36 @@
 </ion-header>
 
 <ion-content>
-  <div text-center>
-    <h1>Em breve disponivel</h1>
-    <h2>Na versão 0.0.2</h2>
-  </div>
-  <ion-grid>
-      <ion-row>
-        <ion-col size-xs="7" size-sm="8" size-md="6" >
-          Estamos no momento trabalhando para evoluir o App a ponto de ser utilizado definitivamente por você, que busca controle financeiro.
-        </ion-col>
-        <ion-col size-xs="5" size-sm="4" size-md="6">
-          Agradecemos imensamente pelo fato de estar avaliando nosso App e se registrando para saber de todas as novidades.
-        </ion-col>
-      </ion-row>
-      <ion-row>
-          <ion-col>
-            Qualquer duvida entre em contato conosco pelo telefone (48) 9 9999-9999 Falar com o Administrador do App FinApp
-          </ion-col>
-          <ion-col>
-            Será um imenso prazer atendelo e saber no que podemos melhorar, sujestões e criticas são sempre bem vindas! 
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+  <ion-list *ngFor="let boletos of boleto">
+    <ion-item-sliding>
+      <ion-item class="items">
+        <ion-label>
+          <h1>{{boletos.descricao}}</h1> 
+          <h3>R$ {{boletos.valor}}</h3>
+          <h4>Data: {{boletos.dataVencimento}}</h4>
+          <h4>#{{boletos.categoria.descricao}}</h4>
+        </ion-label>           
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option class="items " color="light" (click)="confirmarExclusao(boletos)"><ion-icon size="large" color="primary" name="trash" slot="end" ></ion-icon></ion-item-option>
+      </ion-item-options>
+
+      <ion-item-options side="start">
+        <ion-item-option  class="items" color="light" [routerLink] = "['./cadastro/', boletos.id]"> <ion-icon  size="large" color="primary" name="create" slot="end" ></ion-icon></ion-item-option>
+
+      </ion-item-options>  
+    </ion-item-sliding>    
+  </ion-list> 
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button [routerLink]="['./cadastro']" name="add" color="success">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+
+</ion-fab>
+<ion-fab horizontal="start" vertical="bottom" slot="fixed">
+    <ion-fab-button [routerLink]="['/ambiente']" color="secondary">
+        <ion-icon name="exit"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

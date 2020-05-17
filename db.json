@@ -95,5 +95,18 @@
       "descricao": "ggg",
       "id": 6
     }
+  ],
+  "boletos": [
+    {
+      "descricao": "tste",
+      "valor": 10,
+      "categoria": {
+        "descricao": "Teste2",
+        "id": 2
+      },
+      "dataVencimento": "17/8/2020 17:59",
+      "lembrar": true,
+      "id": 1
+    }
   ]
 }
