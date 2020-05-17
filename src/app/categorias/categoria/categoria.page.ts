@@ -41,10 +41,6 @@ export class CategoriaPage implements OnInit {
     this.categoria.valor = null;
   }
   async salvar(){
-   /*this.service.salvar(this.categoria);
-    this.categoria = new Categoria();
-    console.log(this.categoria);
-    this.nav.navigateForward('/categorias')*/
     if (!this.ValidadeInputs()){
       let loading = await this.loadingController.create({message : 'Registrando...'});
       loading.present();
@@ -53,9 +49,9 @@ export class CategoriaPage implements OnInit {
       .salvar(this.categoria)
       .subscribe(() => {
         loading.dismiss();
-        this.presentToast('Lançamento registrado com sucesso!');
+        this.presentToast('Categoria cadatrada com sucesso!');
         this.ClearInputsFields();
-        this.navController.navigateForward(['/ambiente']);
+        this.navController.navigateForward(['/categorias']);
         
       })
     }

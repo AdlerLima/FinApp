@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Categoria } from './categorias.model';
+import { Categoria } from './../models/categoria.interface';
 import { CategoriaService } from '../services/categoria.service';
 import { ToastController, NavController } from '@ionic/angular';
 
@@ -10,26 +10,28 @@ import { ToastController, NavController } from '@ionic/angular';
 })
 export class CategoriasPage implements OnInit {
 
-  private categoria;
+  categorias : Categoria;
 
   constructor(
     private categoriaService: CategoriaService,
     private toastController: ToastController,
     private navController: NavController
-  ) {
-    this.categoria= {
-      descricao : null
-    }
-    
-   }
+  ) {}
 
   ngOnInit() {
-    //this.listarCategorias();
+    this.listarCategorias();
   }
+
+  ionViewWillEnter(){
+    this.listarCategorias();
+  }
+
   listarCategorias(){
     this.categoriaService.getCategorias().subscribe((data) => {
-      this.categoria = data;
+       console.log(data);
+      this.categorias = data;
     });
+    console.log("tesesss");
   }
   
   deletar() {
@@ -44,12 +46,9 @@ export class CategoriasPage implements OnInit {
       })
       .then(toast => toast.present());
   }
+
   ambiente(){
     this.navController.navigateForward(['/categorias'])
   }
-  ionViewWillEnter()
-  {
-    this.listarCategorias();
-
-  }
+  
 }
