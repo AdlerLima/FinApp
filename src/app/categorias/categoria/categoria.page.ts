@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Categoria } from '../categorias.model';
 import { NavController, ToastController, LoadingController } from '@ionic/angular';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class CategoriaPage implements OnInit {
     private categoriaService : CategoriaService,
     private navController: NavController,
     private toastController : ToastController,
-    private loadingController : LoadingController
+    private loadingController : LoadingController,
+    private activatedRoute : ActivatedRoute
     
   ) {
     this.categoria = {
@@ -25,8 +27,19 @@ export class CategoriaPage implements OnInit {
     }
    }
 
-  ngOnInit() {
+   async ngOnInit() {
+
+    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    if(id){
+      const loading = await this.loadingController.create({message:'Carregando'});
+      loading.present();
+      this.categoriaService.getCategoria(id).subscribe((data) =>{
+        this.categoria = data;
+        loading.dismiss();
+      })
+    }
   }
+
   ValidadeInputs(){
     var error = false;
     if (this.categoria.descricao == null)
@@ -36,10 +49,12 @@ export class CategoriaPage implements OnInit {
     }
     return error;
   }
+
   ClearInputsFields(){
     this.categoria.descricao = null;
     this.categoria.valor = null;
   }
+
   async salvar(){
     if (!this.ValidadeInputs()){
       let loading = await this.loadingController.create({message : 'Registrando...'});
@@ -49,13 +64,14 @@ export class CategoriaPage implements OnInit {
       .salvar(this.categoria)
       .subscribe(() => {
         loading.dismiss();
-        this.presentToast('Categoria cadatrada com sucesso!');
+        this.presentToast('Categoria cadastrada com sucesso!');
         this.ClearInputsFields();
         this.navController.navigateForward(['/categorias']);
         
       })
     }
   }
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -63,5 +79,7 @@ export class CategoriaPage implements OnInit {
     });
     toast.present();
   }
+
+  
 
 }

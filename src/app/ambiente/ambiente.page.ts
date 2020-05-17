@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, AlertController, LoadingController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { Router, RouterLink } from '@angular/router';
 //import {HomePage} from './home.page'
 import { HomePage } from '../home/home.page';
@@ -28,10 +28,8 @@ export class AmbientePage implements OnInit {
 
   constructor(
     private router:Router,
-    private navController:NavController,
     private lancamentoService: LancamentosService,
-    private categoriaService: CategoriaService,
-    private despesasService: DespesasService,
+    private toastController: ToastController,
     private alertController: AlertController,
     private loadingController: LoadingController,
 
@@ -43,16 +41,8 @@ export class AmbientePage implements OnInit {
 
   listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
-    //   Object.values(data).forEach(value => {
-           
-    //       this.categoriaService.getCategoria(value['categoria']).subscribe((data) => {
-    //        console.log(data.descricao);   
-    //        this.c += data.descricao;    
-    //       })
-    //   })
-    //  this.categoria = this.c;
-    this.lancamento = data;
-    this.saldo = this.getSaldo(data);
+      this.lancamento = data;
+      this.saldo = this.getSaldo(data);
     })
   }
 
@@ -76,22 +66,10 @@ export class AmbientePage implements OnInit {
 
   }
 
-  editar( lancamento : Lancamento){    
-    console.log(lancamento.id);
-    /*this.x = parseInt(`${lancamento.tipo}?`)    
-    if (this.x == 0){*/
-      this.router.navigate(['lancamentos']) 
-    /*}else if (this.x == 1){
-      this.navegarDespesas();
-    }*/
-
-    
-  }
-
   async confirmarExclusao(lancamento: Lancamento) {
     let alerta = await this.alertController.create({
       header: 'Confirmação de exclusão',
-      message: `Deseja excluir o autor ${lancamento.descricao}?`,
+      message: `Deseja excluir o lançamento ${lancamento.descricao}?`,
       buttons: [{
         text: 'SIM',
         handler: () => {
@@ -109,9 +87,20 @@ export class AmbientePage implements OnInit {
     busyLoader.present();
     
     this.lancamentoService.excluir(lancamento).subscribe(() => {
+      this.showToast('Lançamento excluído!');
       this.ionViewWillEnter()
       busyLoader.dismiss();
     });
+  }
+
+  async showToast(message) {
+    const toast = await this.toastController.create({
+      header: message,
+      position: 'top',
+      color: 'success',
+      duration: 2000
+    });
+    toast.present();
   }
 
   navegarLancamentos() {

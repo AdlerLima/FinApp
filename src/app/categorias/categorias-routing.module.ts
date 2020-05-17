@@ -8,6 +8,15 @@ const routes: Routes = [
     path: '',
     component: CategoriasPage
   }
+  ,
+  {
+    path: 'categoria',
+    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+  },
+  {
+    path: 'categoria/:id',
+    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+  }
 ];
 
 @NgModule({

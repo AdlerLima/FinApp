@@ -38,6 +38,8 @@ export class DespesasPage implements OnInit {
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
+      position: 'top',
+      color: 'success',
       duration: 2000
     });
     toast.present();
