@@ -21,7 +21,8 @@
       </ion-item-options>
 
       <ion-item-options side="start">
-        <ion-item-option  class="items" color="light" [routerLink] = "['./lancamentos/', lancamentos.id]"> <ion-icon  size="large" color="primary" name="create" slot="end" ></ion-icon></ion-item-option>
+        <ion-item-option  class="items" color="light" [routerLink] = "lancamentos.tipo == 0 ? ['./lancamentos/', lancamentos.id] : ['./despesas/', lancamentos.id]"> <ion-icon  size="large" color="primary" name="create" slot="end" ></ion-icon></ion-item-option>
+
       </ion-item-options>  
     </ion-item-sliding>    
   </ion-list> 

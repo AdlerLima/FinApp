@@ -3,6 +3,7 @@ import { ToastController, NavController, LoadingController } from '@ionic/angula
 import { DespesasService } from '../services/despesas.service';
 import { Despesa } from "../models/despesa.interface";
 import { CategoriaService } from '../services/categoria.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ export class DespesasPage implements OnInit {
     private despesasService: DespesasService,
     private categoriaService: CategoriaService,
     private toastController: ToastController,
-    private loadingController : LoadingController
+    private loadingController : LoadingController,
+    private activatedRoute : ActivatedRoute
   ) {
     this.despesa = {
       descricao : null,
@@ -41,8 +43,17 @@ export class DespesasPage implements OnInit {
     toast.present();
   } 
 
-  ngOnInit() {
+  async ngOnInit() {
     this.listarCategorias();
+    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    if(id){
+      const loading = await this.loadingController.create({message:'Carregando'});
+      loading.present();
+      this.despesasService.getDespesa(id).subscribe((data) =>{
+        this.despesa = data;
+        loading.dismiss();
+      })
+    }
   }
 
   listarCategorias(){

@@ -75,7 +75,9 @@ export class AmbientePage implements OnInit {
     this.listarlancamentos();
 
   }
+
   editar( lancamento : Lancamento){    
+    console.log(lancamento.id);
     /*this.x = parseInt(`${lancamento.tipo}?`)    
     if (this.x == 0){*/
       this.router.navigate(['lancamentos']) 
