@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { NavController, ToastController, LoadingController } from '@ionic/angular'
-import { AmbientePage } from '../ambiente/ambiente.page';
 import { LancamentosService } from '../services/lancamentos.service';
-import { Categoria } from '../categorias/categorias.model';
+import { CategoriaService } from '../services/categoria.service';
 
 
 
@@ -15,11 +14,13 @@ import { Categoria } from '../categorias/categorias.model';
 export class LancamentosPage implements OnInit {
 
   private lancamento;
+  private categorias;
 
 
   constructor(
     private navController: NavController,
     private lancamentoService: LancamentosService,
+    private categoriaService: CategoriaService,
     private toastController:ToastController,
     private loadingController : LoadingController
   ) { 
@@ -28,14 +29,22 @@ export class LancamentosPage implements OnInit {
       descricao : null,
       valor : null,
       dataLancamento : null,
+      categoria : null,
       tipo : 0,
       cor : "success"
     }
     }  
 
   ngOnInit() {
-    
+    this.listarCategorias();
   }
+
+  listarCategorias(){
+    this.categoriaService.getCategorias().subscribe((data) => {
+      this.categorias = data;
+    });
+  }
+
   ValidateInputs(){
     var error = false;
     if (this.lancamento.descricao == null || this.lancamento.valor == undefined)
@@ -55,9 +64,11 @@ export class LancamentosPage implements OnInit {
     }
     return error;
   }
+
   ambiente() {
     this.navController.navigateForward(['/ambiente'])
   }
+
   async presentToast(message) {
     const toast = await this.toastController.create({
       message: message,
@@ -65,28 +76,28 @@ export class LancamentosPage implements OnInit {
     });
     toast.present();
   }
+
   ClearInputsFields(){
     this.lancamento.descricao = null;
     this.lancamento.valor = null;
-
-
+    this.lancamento.categoria = null;
   }
-    async salvar(){
-      if (!this.ValidateInputs()){
-        let loading = await this.loadingController.create({message: 'Registrando...'});
-        loading.present();
-    
-        this.lancamentoService
-        .salvar(this.lancamento)
-        .subscribe(() => {
-          loading.dismiss();
-          this.presentToast('Lançamento registrado com sucesso!');
-          this.ClearInputsFields();
-          this.navController.navigateForward(['/ambiente']);
-          console.log(Categoria);
-        });
-      } 
-    }
+
+  async salvar(){
+    if (!this.ValidateInputs()){
+      let loading = await this.loadingController.create({message: 'Registrando...'});
+      loading.present();
+  
+      this.lancamentoService
+      .salvar(this.lancamento)
+      .subscribe(() => {
+        loading.dismiss();
+        this.presentToast('Lançamento registrado com sucesso!');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
+      });
+    } 
   }
+}
   
 
