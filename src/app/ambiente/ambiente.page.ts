@@ -105,11 +105,7 @@ export class AmbientePage implements OnInit {
   async confirmarExclusao(lancamento: Lancamento) {
     let alerta = await this.alertController.create({
       header: 'Confirmação de exclusão',
-<<<<<<< HEAD
       message: `Deseja excluir o Lancamento ${lancamento.descricao}?`,
-=======
-      message: `Deseja excluir o lançamento ${lancamento.descricao}?`,
->>>>>>> 6842cb44b607e399d8187f5ad423bff5f0c3ea43
       buttons: [{
         text: 'SIM',
         handler: () => {
