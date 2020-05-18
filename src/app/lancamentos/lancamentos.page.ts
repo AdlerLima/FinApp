@@ -5,9 +5,6 @@ import { CategoriaService } from '../services/categoria.service';
 import { ActivatedRoute } from '@angular/router';
 import { Data } from "../helpers/data";
 
-
-
-
 @Component({
   selector: 'app-lancamentos',
   templateUrl: './lancamentos.page.html',
