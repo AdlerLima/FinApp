@@ -29,7 +29,7 @@ export class AmbientePage implements OnInit {
   private boletos;
   private dataVencimento;
   public cor : string;
-  
+  visto : boolean;  
   constructor(
     private router:Router,
     private lancamentoService: LancamentosService,
@@ -38,11 +38,15 @@ export class AmbientePage implements OnInit {
     private loadingController: LoadingController,
     private boletosService: BoletosService
 
-  ) { }
+  ) { 
+    this.visto = false;
+  }
 
   ngOnInit() {
     this.listarlancamentos();
     this.corAmbiente();
+    
+    
   }
 
   listarlancamentos(){
@@ -60,15 +64,20 @@ export class AmbientePage implements OnInit {
     
   }
   getBoletos(){
+    if(!this.visto){
     var dNow = new Date();
     var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear();
     this.boletosService.getAll().subscribe((data) =>{
+
       this.boletos = data;
       Object.values(data).forEach(value => {
-        if(value['dataVencimento'] <= localdate)
-          this.alerta();   
+        if (value['lembrar'] == true){
+          if(value['dataVencimento'] <= localdate)
+            this.alerta();  
+            this.visto = true; 
+          }
     });
-    })
+    }) }
     
   }
   async alerta(){
@@ -81,7 +90,11 @@ export class AmbientePage implements OnInit {
           this.router.navigate(['/status'])    
         }
       }, {
-        text: 'NÃO'
+        text: 'NÃO',
+        handler:() => {
+         this.boletos.lembrar = false
+         this.boletosService.atualizar(this.boletos);          
+        }
       }]
     });
     alerta.present();

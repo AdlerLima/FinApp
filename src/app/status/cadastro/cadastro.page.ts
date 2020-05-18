@@ -3,6 +3,7 @@ import { ToastController, LoadingController, NavController } from '@ionic/angula
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { BoletosService } from 'src/app/services/boletos.service';
 import { ActivatedRoute } from '@angular/router';
+import { Data } from "../../helpers/data";
 
 @Component({
   selector: 'app-cadastro',
@@ -20,7 +21,8 @@ export class CadastroPage implements OnInit {
     private boletoService : BoletosService,
     private toastController:ToastController,
     private loadingController : LoadingController,
-    private activatedRoute : ActivatedRoute
+    private activatedRoute : ActivatedRoute,
+    private DataHelper : Data
   ) {
     this.boleto = {
       descricao : null,
@@ -89,7 +91,7 @@ export class CadastroPage implements OnInit {
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando...'});
       loading.present();
-  
+      this.boleto.dataVencimento = this.DataHelper.formatDate(this.boleto.dataVencimento);
       this.boletoService
       .salvar(this.boleto)
       .subscribe(() => {

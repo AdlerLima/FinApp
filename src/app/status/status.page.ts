@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BoletosService } from '../services/boletos.service';
 import { Boletos } from '../models/boletos.interface';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { Data } from '@angular/router';
 
 @Component({
   selector: 'app-status',
@@ -14,7 +15,8 @@ export class StatusPage implements OnInit {
   constructor(
     private boletosService : BoletosService,
     private alertController: AlertController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+
   ) { }
 
   ngOnInit() {
