@@ -28,7 +28,8 @@ export class AmbientePage implements OnInit {
   x : number;
   private boletos;
   private dataVencimento;
-  
+  public cor : string;
+  visto : boolean;  
   constructor(
     private router:Router,
     private lancamentoService: LancamentosService,
@@ -37,32 +38,46 @@ export class AmbientePage implements OnInit {
     private loadingController: LoadingController,
     private boletosService: BoletosService
 
-  ) { }
+  ) { 
+    this.visto = false;
+  }
 
   ngOnInit() {
     this.listarlancamentos();
+    this.corAmbiente();
     
-    //console.log(this.getBoletos());
+    
   }
 
   listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
       this.lancamento = data;
-      this.saldo = this.getSaldo(data);
+      this.saldo = this.getSaldo(data);      
     })
   }
+  corAmbiente(){
+    if(this.saldo < 0){
+      this.cor = "danger"
+    }else{
+      this.cor = "primary"
+    }
+    
+  }
   getBoletos(){
+    if(!this.visto){
     var dNow = new Date();
-    var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear() + ' ' + dNow.getHours() + ':' + dNow.getMinutes();
-    console.log(localdate);    
-
+    var localdate = dNow.getDate() + '/' + (dNow.getMonth()+1) + '/' + dNow.getFullYear();
     this.boletosService.getAll().subscribe((data) =>{
+
       this.boletos = data;
       Object.values(data).forEach(value => {
-        if(value['dataVencimento'] <= localdate)
-          this.alerta();   
+        if (value['lembrar'] == true){
+          if(value['dataVencimento'] <= localdate)
+            this.alerta();  
+            this.visto = true; 
+          }
     });
-    })
+    }) }
     
   }
   async alerta(){
@@ -75,7 +90,11 @@ export class AmbientePage implements OnInit {
           this.router.navigate(['/status'])    
         }
       }, {
-        text: 'NÃO'
+        text: 'NÃO',
+        handler:() => {
+         this.boletos.lembrar = false
+         this.boletosService.atualizar(this.boletos);          
+        }
       }]
     });
     alerta.present();
@@ -89,7 +108,7 @@ export class AmbientePage implements OnInit {
         if(value['tipo'] == 1)
           saida += value['valor'];
         else if(value['tipo'] == 0)
-          entrada += value['valor'];        
+          entrada += value['valor'];      
     });
 
     return entrada - saida;
@@ -99,7 +118,7 @@ export class AmbientePage implements OnInit {
   {
     this.listarlancamentos();
     this.getBoletos();
-
+    this.corAmbiente();
   }
 
   async confirmarExclusao(lancamento: Lancamento) {
