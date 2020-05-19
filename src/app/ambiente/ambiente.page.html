@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar padding center text-center color="{{cor}}">
-    <ion-title><h1>R$ {{saldo}}</h1></ion-title>
+  <ion-toolbar padding center text-center color="primary">
+    <ion-title><h1>{{saldo  | currency:'BRL':'symbol':'0.2-2':'pt'}}</h1></ion-title>
   </ion-toolbar>
 </ion-header>
   
@@ -11,8 +11,8 @@
       <ion-item class="items" color = {{lancamentos.cor}}>
         <ion-label>
           <h1>{{lancamentos.descricao}}</h1>
-          <h3>R$ {{lancamentos.valor}}</h3>
-          <h4><ion-icon name="md-calendar" ></ion-icon >{{lancamentos.dataLancamento}}</h4>
+          <h3><ion-icon  name="cash" ></ion-icon> {{lancamentos.valor | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
+          <h4><ion-icon  name="calendar" ></ion-icon>{{lancamentos.dataLancamento}}</h4>
           <h4><ion-icon  name="list" ></ion-icon>{{lancamentos.categoria.descricao}}</h4>
         </ion-label>           
       </ion-item>
