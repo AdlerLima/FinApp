@@ -40,37 +40,8 @@
       "id": 5
     }
   ],
-  "lancamentos": [
-    {
-      "descricao": "sdfsd",
-      "valor": 4234,
-      "dataLancamento": "2019-05-17T16:45:05.943-03:00",
-      "categoria": {
-        "descricao": "tuti fruit",
-        "id": 4
-      },
-      "tipo": 1,
-      "cor": "danger",
-      "id": 2
-    },
-    {
-      "descricao": "efsdfs",
-      "valor": 3345,
-      "dataLancamento": "2019-05-17T17:15:06.610-03:00",
-      "categoria": {
-        "descricao": "cacassss",
-        "id": 7
-      },
-      "tipo": 0,
-      "cor": "success",
-      "id": 3
-    }
-  ],
+  "lancamentos": [],
   "categoria": [
-    {
-      "descricao": "Lazer",
-      "id": 2
-    },
     {
       "descricao": "Shopping",
       "id": 2
@@ -82,31 +53,7 @@
     {
       "descricao": "Teste2",
       "id": 2
-    },
-    {
-      "descricao": "tuti fruit",
-      "id": 4
-    },
-    {
-      "descricao": "cacassss",
-      "id": 7
-    },
-    {
-      "descricao": "cacassss",
-      "id": 7
     }
   ],
-  "boletos": [
-    {
-      "descricao": "tste",
-      "valor": 10,
-      "categoria": {
-        "descricao": "Teste2",
-        "id": 2
-      },
-      "dataVencimento": "17/8/2020 17:59",
-      "lembrar": true,
-      "id": 1
-    }
-  ]
+  "boletos": []
 }
