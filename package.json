@@ -26,6 +26,8 @@
     "@ionic/angular": "^4.7.1",
     "core-js": "^2.5.4",
     "json-server": "^0.16.1",
+    "ngx-mask": "^9.0.2",
+    "ngx-mask-ionic": "^1.1.2",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
