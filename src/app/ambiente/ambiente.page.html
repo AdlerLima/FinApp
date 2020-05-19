@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar padding center text-center color="primary">
-    <ion-title><h1>{{saldo  | currency:'BRL':'symbol':'0.2-2':'pt'}}</h1></ion-title>
+    <ion-title>Saldo</ion-title>
+    <b>{{saldo  | currency:'BRL':'symbol':'0.2-2':'pt'}}</b>
   </ion-toolbar>
 </ion-header>
   
 <ion-content color="light">
-  
+ 
   <ion-list *ngFor="let lancamentos of lancamento">
     <ion-item-sliding>
       <ion-item class="items" color = {{lancamentos.cor}}>
