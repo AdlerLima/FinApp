@@ -10,12 +10,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { Data } from "./helpers/data";
 import localePt from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import {NgxMaskIonicModule} from 'ngx-mask-ionic';
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, NgxMaskIonicModule.forRoot()],
   providers: [
     StatusBar,
     SplashScreen,
