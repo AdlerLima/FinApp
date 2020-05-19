@@ -29,7 +29,8 @@ export class AmbientePage implements OnInit {
   private boletos;
   private dataVencimento;
   public cor : string;
-  visto : boolean;  
+  visto : boolean; 
+  mostrou : boolean; 
   constructor(
     private router:Router,
     private lancamentoService: LancamentosService,
@@ -71,11 +72,14 @@ export class AmbientePage implements OnInit {
 
       this.boletos = data;
       Object.values(data).forEach(value => {
+        if(!this.mostrou){
         if (value['lembrar'] == true){
           if(value['dataVencimento'] <= localdate)
             this.alerta();  
-            this.visto = true; 
+            this.visto = true;
+            this.mostrou = true
           }
+        }
     });
     }) }
     

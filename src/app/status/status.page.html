@@ -10,7 +10,7 @@
       <ion-item class="items" color="tertiary">
         <ion-label>
           <h1><ion-icon name="md-document"></ion-icon>{{boletos.descricao}}</h1> 
-          <h4>R$ {{boletos.valor}}</h4>
+          <h4><ion-icon  name="cash" ></ion-icon>{{boletos.valor | currency:'BRL':'symbol':'0.2-2':'pt'}}</h4>
           <h4><ion-icon name="md-calendar" ></ion-icon >{{boletos.dataVencimento}}</h4>
           <h4><ion-icon name="list" ></ion-icon >{{boletos.categoria.descricao}}</h4>
         </ion-label>           

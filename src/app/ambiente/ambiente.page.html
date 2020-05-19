@@ -17,6 +17,7 @@
           <h4><ion-icon  name="list" ></ion-icon>{{lancamentos.categoria.descricao}}</h4>
         </ion-label>           
       </ion-item>
+
       <ion-item-options side="end">
         <ion-item-option class="items " color="light" (click)="confirmarExclusao(lancamentos)"><ion-icon size="large" color="primary" name="trash" slot="end" ></ion-icon></ion-item-option>
       </ion-item-options>
@@ -27,7 +28,7 @@
       </ion-item-options>  
     </ion-item-sliding>    
   </ion-list> 
-    
+    <div id="footer"></div>
     <ion-fab horizontal="end" vertical="bottom" slot="fixed">
         <ion-fab-button color="primary">
           <ion-icon name="arrow-dropup"></ion-icon>
@@ -53,5 +54,5 @@
         </ion-fab-button>
       </ion-fab>
 
+    </ion-content>
 
-</ion-content>
