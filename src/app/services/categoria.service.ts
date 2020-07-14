@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Categoria } from '../models/categoria.interface';
+import { API_URL } from '../config/apiconfig';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  private URI = 'http://localhost:3000/categoria';
+  private URI = API_URL + 'categoria';
   constructor(
     private httpClient : HttpClient
   ) {  }

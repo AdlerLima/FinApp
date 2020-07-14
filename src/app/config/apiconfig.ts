@@ -1,0 +1,1 @@
+export const API_URL = "http://localhost:8090/finapp-api/resources/"

@@ -35,7 +35,7 @@ export class CadastroPage implements OnInit {
   async ngOnInit() {
     this.listarCategorias();
 
-    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    const id = this.activatedRoute.snapshot.params['id'];
     if(id){
       const loading = await this.loadingController.create({message:'Carregando'});
       loading.present();
@@ -91,7 +91,7 @@ export class CadastroPage implements OnInit {
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando...'});
       loading.present();
-      this.boleto.dataVencimento = this.DataHelper.formatDate(this.boleto.dataVencimento);
+      //this.boleto.dataVencimento = this.DataHelper.formatDate(this.boleto.dataVencimento);
       this.boletoService
       .salvar(this.boleto)
       .subscribe(() => {
@@ -99,6 +99,11 @@ export class CadastroPage implements OnInit {
         this.presentToast('Boleto registrado com sucesso!');
         this.ClearInputsFields();
         this.navController.navigateForward(['/status']);
+      }, () => {
+        loading.dismiss();
+        this.presentToast('Ops, ocorreu um erro!');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
       });
     } 
   }

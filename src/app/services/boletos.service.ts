@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Boletos } from '../models/boletos.interface';
+import { API_URL } from '../config/apiconfig';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoletosService {
-  private URI = 'http://localhost:3000/boletos';
+  private URI = API_URL + 'boleto';
 
   constructor(
     private httpClient : HttpClient

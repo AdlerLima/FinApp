@@ -29,7 +29,7 @@ export class CategoriaPage implements OnInit {
 
    async ngOnInit() {
 
-    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    const id = this.activatedRoute.snapshot.params['id'];
     if(id){
       const loading = await this.loadingController.create({message:'Carregando'});
       loading.present();
@@ -68,7 +68,12 @@ export class CategoriaPage implements OnInit {
         this.ClearInputsFields();
         this.navController.navigateForward(['/categorias']);
         
-      })
+      }, () => {
+        loading.dismiss();
+        this.presentToast('Ops, ocorreu um erro!');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
+      });
     }
   }
 

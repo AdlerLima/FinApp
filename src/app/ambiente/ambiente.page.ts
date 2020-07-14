@@ -45,14 +45,12 @@ export class AmbientePage implements OnInit {
 
   ngOnInit() {
     this.listarlancamentos();
-    this.corAmbiente();
-    
-    
+    this.corAmbiente();    
   }
 
   listarlancamentos(){
     this.lancamentoService.getAll().subscribe((data) => {
-      this.lancamento = data;
+      this.lancamento = data; 
       this.saldo = this.getSaldo(data);      
     })
   }
@@ -109,9 +107,9 @@ export class AmbientePage implements OnInit {
     var saida = 0;
     
     Object.values(data).forEach(value => {
-        if(value['tipo'] == 1)
+        if(value['tipo'] == "despesa")
           saida += value['valor'];
-        else if(value['tipo'] == 0)
+        else if(value['tipo'] == "lancamento")
           entrada += value['valor'];      
     });
 

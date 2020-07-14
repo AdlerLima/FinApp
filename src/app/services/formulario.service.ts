@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario} from '../models/usuario.interface';
+import { API_URL } from '../config/apiconfig';
 
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Usuario} from '../models/usuario.interface';
 })
 export class FormularioService {
 
-  private URI = 'http://localhost:3000/usuarios';
+  private URI = API_URL + 'usuario';
 
   constructor(
     private httpClient : HttpClient

@@ -38,7 +38,7 @@ export class LancamentosPage implements OnInit {
  async ngOnInit() {
     this.listarCategorias();
 
-    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    const id = this.activatedRoute.snapshot.params['id'];
     if(id){
       const loading = await this.loadingController.create({message:'Carregando'});
       loading.present();
@@ -109,13 +109,18 @@ export class LancamentosPage implements OnInit {
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando...'});
       loading.present();
-      this.lancamento.dataLancamento = this.DataHelper.formatDate(this.lancamento.dataLancamento);
+      // this.lancamento.dataLancamento = this.DataHelper.formatDate(this.lancamento.dataLancamento);
       
       this.lancamentoService
       .salvar(this.lancamento)
       .subscribe(() => {
         loading.dismiss();
         this.presentToast('Lançamento registrado com sucesso!', 'success');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
+      }, () => {
+        loading.dismiss();
+        this.presentToast('Ops, ocorreu um erro!', "danger");
         this.ClearInputsFields();
         this.navController.navigateForward(['/ambiente']);
       });

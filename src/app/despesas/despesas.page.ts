@@ -49,7 +49,7 @@ export class DespesasPage implements OnInit {
 
   async ngOnInit() {
     this.listarCategorias();
-    const id = parseInt(this.activatedRoute.snapshot.params['id']);
+    const id = this.activatedRoute.snapshot.params['id'];
     if(id){
       const loading = await this.loadingController.create({message:'Carregando'});
       loading.present();
@@ -106,12 +106,17 @@ export class DespesasPage implements OnInit {
     if (!this.ValidateInputs()){
       let loading = await this.loadingController.create({message: 'Registrando despesa...'});
       loading.present();
-      this.despesa.dataLancamento = this.DataHelper.formatDate(this.despesa.dataLancamento);
+      //this.despesa.dataLancamento = this.DataHelper.formatDate(this.despesa.dataLancamento);
       this.despesasService
       .salvar(this.despesa)
       .subscribe(() => {
         loading.dismiss();
         this.presentToast('Despesa registrada com sucesso!',  'success');
+        this.ClearInputsFields();
+        this.navController.navigateForward(['/ambiente']);
+      }, () => {
+        loading.dismiss();
+        this.presentToast('Ops, ocorreu um erro!', "danger");
         this.ClearInputsFields();
         this.navController.navigateForward(['/ambiente']);
       });

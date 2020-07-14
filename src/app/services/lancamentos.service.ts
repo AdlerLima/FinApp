@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lancamento } from "../models/lancamento.interface";
+import { API_URL } from '../config/apiconfig';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class LancamentosService {
     { id:2, descricao:'Teste2', valor: 50 }
   ];*/
 
-  private URI = 'http://localhost:3000/lancamentos';
+  private URI = API_URL + 'lancamento';
 
   constructor(
     private HttpClient : HttpClient
