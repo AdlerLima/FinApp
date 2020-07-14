@@ -14,7 +14,7 @@
           <h1>{{lancamentos.descricao}}</h1>
           <h3><ion-icon  name="cash" ></ion-icon> {{lancamentos.valor | currency:'BRL':'symbol':'0.2-2':'pt'}}</h3>
           <h4><ion-icon  name="calendar" ></ion-icon>{{lancamentos.dataLancamento | date: 'dd/MM/yyyy'}}</h4>
-          <!-- <ion-badge  color="light" slot="end">{{lancamentos.categoria.descricao}}</ion-badge> -->
+          <ion-badge  color="light" slot="end">{{lancamentos.categoria.descricao}}</ion-badge>
         </ion-label>           
       </ion-item>
 
@@ -23,7 +23,7 @@
       </ion-item-options>
 
       <ion-item-options side="start">
-        <ion-item-option  class="items" color="light" [routerLink] = "lancamentos.tipo == 0 ? ['./lancamentos/', lancamentos.id] : ['./despesas/', lancamentos.id]"> <ion-icon  size="large" color="primary" name="create" slot="end" ></ion-icon></ion-item-option>
+        <ion-item-option  class="items" color="light" [routerLink] = "lancamentos.tipo == 'lancamento' ? ['./lancamentos/', lancamentos.id] : ['./despesas/', lancamentos.id]"> <ion-icon  size="large" color="primary" name="create" slot="end" ></ion-icon></ion-item-option>
 
       </ion-item-options>  
     </ion-item-sliding>    
